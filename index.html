@@ -6,6 +6,43 @@
     <title>Login to MrBoys VIP</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="./js/ck.js" defer></script> <!-- Include ck.js for developer tools deterrent -->
+    <style>
+        /* Modal styles */
+        #warningModal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+            color: white; /* Text color */
+            text-align: center;
+            padding-top: 100px; /* Place the modal content at the center */
+        }
+        #warningModal .modal-content {
+            background-color: #333;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        #warningModal .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        #warningModal .close:hover,
+        #warningModal .close:focus {
+            color: red;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="light-mode">
 
@@ -57,10 +94,10 @@
         <?php endif; ?>
     </div>
 
-     <!-- Firebase configuration and legacy global usage -->
-     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-     <script src="./js/firebase.js"></script>
+    <!-- Firebase configuration and legacy global usage -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./js/firebase.js"></script>
 
     <!-- Visitor Count Logic -->
     <script>
@@ -86,5 +123,53 @@
 
     <script src="js/script.js"></script>
 
+    <!-- Warning Modal HTML -->
+    <div id="warningModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Warning!</h2>
+            <p>Do not attempt to open Developer Tools.</p>
+        </div>
+    </div>
+
+    <script>
+        // Show warning modal when trying to open developer tools
+        window.onload = function () {
+            const warningModal = document.getElementById('warningModal');
+
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault(); // Disable right-click context menu
+            }, false);
+
+            document.addEventListener("keydown", function (e) {
+                // Prevent specific key combinations
+                if ((e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl + Shift + I
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl + Shift + J
+                    (e.ctrlKey && e.keyCode === 85) || // Ctrl + U
+                    (e.ctrlKey && e.keyCode === 83) || // Ctrl + S
+                    (e.keyCode === 123) // F12
+                ) {
+                    e.preventDefault(); // Prevent the default action
+                    showWarning(); // Show warning modal
+                }
+            }, false);
+
+            function showWarning() {
+                warningModal.style.display = "block"; // Show the modal
+            }
+            
+            // Close the modal when the user clicks on <span> (x)
+            document.querySelector('.close').onclick = function() {
+                warningModal.style.display = "none"; // Hide the modal
+            }
+            
+            // Close the modal when clicking anywhere outside of the modal
+            window.onclick = function(event) {
+                if (event.target == warningModal) {
+                    warningModal.style.display = "none"; // Hide the modal
+                }
+            }
+        };
+    </script>
 </body>
 </html>
