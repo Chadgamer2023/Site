@@ -59,8 +59,9 @@
 
      <!-- Firebase configuration and legacy global usage -->
      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-     <script src="./js/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="js/test.js"></script> <!-- Ensure this is before firebase.js -->
+    <script src="js/firebase.js"></script> <!-- Then load your Firebase logic -->
 
     <!-- Visitor Count Logic -->
     <script>
