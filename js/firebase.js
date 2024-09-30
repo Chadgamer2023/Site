@@ -1,13 +1,5 @@
 // Firebase configuration and initialization
-const firebaseConfig = {
-    apiKey: "AIzaSyDViywB4Oyq6GF1alYLqzeDjeSz-P8iDYo",
-    authDomain: "messagestorage7346562.firebaseapp.com",
-    databaseURL: "https://messagestorage7346562-default-rtdb.firebaseio.com",
-    projectId: "messagestorage7346562",
-    storageBucket: "messagestorage7346562.appspot.com",
-    messagingSenderId: "858210728204",
-    appId: "1:858210728204:web:6bc76cd4b4c0c4153ef129"
-  };
+
 
 // Initialize Firebase (using legacy Firebase global object)
 firebase.initializeApp(firebaseConfig);
