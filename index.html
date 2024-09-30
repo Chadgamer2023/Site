@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to MrBoys VIP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="light-mode">
+
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle">Enable Dark Mode</button>
+
+    <div class="login-container">
+        <h1>Login to MrBoys VIP</h1>
+        
+        <div class="content">
+            <form id="loginForm" action="login.php" method="POST">
+                
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <!-- Visitor counter -->
+                <div>
+                    <p>Visitor Count: <span id="visitorCount">Loading...</span></p>
+                </div>
+                
+                <!-- VRC Button -->
+                <button type="button" id="vrcButton" class="tos-btn">VRC</button>
+
+                <!-- TOS Popup -->
+                <div id="tosPopup" class="popup">
+                    <div class="popup-content">
+                        <p>Terms of Service: You will most likely see racial slurs and multiple slurs by accepting these terms of service. You agree to be 18 years of age. I'm not responsible for any hurt feelings. </p>
+                        <button id="tosYes">Yes</button>
+                        <button id="tosNo">No</button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="rounded-button">Login</button>
+
+            </form>
+        </div>
+
+        <!-- Error Handling -->
+        <?php if (isset($_GET['error'])): ?>
+            <p class="error-message"><?php echo $_GET['error']; ?></p>
+        <?php endif; ?>
+    </div>
+
+     <!-- Firebase configuration and legacy global usage -->
+     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+     <script src="./js/firebase.js"></script>
+
+    <!-- Visitor Count Logic -->
+    <script>
+        const visitorCountElement = document.getElementById('visitorCount');
+        const visitKey = 'hasVisited'; // Key for localStorage to track if the user has visited
+
+        // Function to update the visitor count in the DOM
+        function updateVisitorCount(count) {
+            visitorCountElement.textContent = count;
+        }
+
+        // Fetch the current visitor count from Firebase and update the page
+        fetchVisitorCount(updateVisitorCount);
+
+        // Check if the user has visited before using localStorage
+        if (!localStorage.getItem(visitKey)) {
+            // If the user hasn't visited, increment the count
+            incrementVisitorCount();
+            // Mark the user as visited in localStorage to prevent spamming
+            localStorage.setItem(visitKey, 'true');
+        }
+    </script>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
