@@ -1,0 +1,258 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Login Container */
+.login-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Input Field Container */
+.input-container {
+    position: relative;
+    margin: 15px 0;
+}
+
+/* Style for input fields */
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px; /* Add padding to make space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+input[type="text"], input[type="password"] {
+    width: 100%; /* 100% width but constrained within container */
+    padding: 10px 40px; /* Left padding for icon spacing */
+    margin: 10px 0;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* Adjust the width of the password field */
+input[type="password"] {
+    width: 95%; /* Reduced width for better alignment */
+}
+
+/* Visitor Counter */
+.counter {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: black; /* Fixed color for light mode */
+}
+
+body.dark-mode .counter {
+    color: white; /* Ensure it’s visible in dark mode */
+}
+
+/* Login Button */
+.rounded-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.rounded-button:hover {
+    background-color: #0056b3;
+}
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Dark background in dark mode */
+    color: white; /* White text for better visibility */
+}
+
+.tos-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Message Box for VRChat */
+.message-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+}
+
+.rules {
+    font-size: 12px;
+    color: gray;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode input, body.dark-mode .login-container, body.dark-mode .message-box {
+    background-color: #333;
+    color: white;
+}
+
+body.dark-mode input::placeholder, body.dark-mode textarea::placeholder {
+    color: #ccc;
+}
+
+body.dark-mode textarea, body.dark-mode input {
+    background-color: #333;
+    color: white;
+}
+
+body.dark-mode .rounded-button {
+    background-color: #555;
+}
+
+body.dark-mode .rounded-button:hover {
+    background-color: #333;
+}
+
+/* Adjust message box color in dark mode */
+body.dark-mode .message-box {
+    background-color: #222; /* Darker background to make text visible */
+    border-color: #555; /* Border color for better contrast */
+}
+
+/* VRChat page specific fix */
+body.dark-mode textarea, body.dark-mode input[type="text"] {
+    background-color: #222; /* Make input fields visible in dark mode */
+    color: white;
+}
+
+/* Container for VRChat message board */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 80vh; /* Set height for scrollability */
+}
+
+/* Left column for displaying messages */
+.message-column-left,
+.message-column-right {
+    width: 30%;
+    height: 100%; /* Ensure the message column is full height */
+    overflow-y: auto; /* Scrollable content */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Adding some margin to the message display columns */
+.message-column-left {
+    margin-right: 20px; /* Space between the left column and the form */
+}
+
+.message-column-right {
+    margin-left: 20px; /* Space between the form and the right column */
+}
+
+.message-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Dark mode adjustments for message display */
+body.dark-mode .message-column-left,
+body.dark-mode .message-column-right {
+    background-color: #222;
+    border-color: #555;
+}
+
+body.dark-mode .message {
+    background-color: #333;
+    border-color: #444;
+}
