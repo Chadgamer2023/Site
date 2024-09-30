@@ -150,3 +150,36 @@ function displayMessages(messages) {
         console.log("No messages found");
     }
 }
+
+// Prevent F12 and Ctrl+Shift+I
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+        event.preventDefault();
+        alert('DevTools is disabled on this site.');
+    }
+});
+
+// Disable right-click
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+    alert('Right-click is disabled on this site.');
+});
+
+// Detect if DevTools is open
+const devtools = { open: false };
+
+const element = new Image();
+Object.defineProperty(element, 'id', {
+    get: function() {
+        devtools.open = true;
+        alert('DevTools is not allowed on this site.');
+        return '';
+    }
+});
+
+console.log(element);
+
+// Disable console logs in production
+if (process.env.NODE_ENV === 'production') {
+    console.log = function() {};
+}

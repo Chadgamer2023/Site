@@ -1,4 +1,4 @@
-// cant be bothered to try and hide it no more reyku
+// Firebase configuration and initialization
 const firebaseConfig = {
     apiKey: "AIzaSyDViywB4Oyq6GF1alYLqzeDjeSz-P8iDYo",
     authDomain: "messagestorage7346562.firebaseapp.com",
