@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrchat Message Board</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDKs (Legacy, version 8) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+    <!-- Custom Firebase logic -->
+    <script src="js/firebase.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body class="message-board-page dark-mode">
+
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle">Enable Light Mode</button>
+
+    <!-- Container to hold the message columns and the form -->
+    <div class="container">
+
+        <!-- Left Message Column -->
+        <div class="message-column-left">
+            <h2>Anonymous Messages</h2>
+            <div id="messageDisplayLeft" class="message-display">
+                <!-- Left column messages (anonymous) will appear here -->
+            </div>
+        </div>
+
+        <!-- Message Form in the center -->
+        <div class="message-box">
+            <h1>Post a Message</h1>
+            <form id="messageForm">
+                <label for="username">Name (optional, defaults to Anonymous):</label>
+                <input type="text" id="username" name="username" placeholder="Enter name">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Write your message..."></textarea>
+
+                <button type="submit">Post Message</button>
+            </form>
+            <p class="rules">Rules: Don't be a cunt</p>
+        </div>
+
+        <!-- Right Message Column -->
+        <div class="message-column-right">
+            <h2>Named User Messages</h2>
+            <div id="messageDisplayRight" class="message-display">
+                <!-- Right column messages (named users) will appear here -->
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
