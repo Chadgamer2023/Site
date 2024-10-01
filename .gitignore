@@ -10,7 +10,6 @@ dist/
 build/
 
 # Environment variables
-.env
 
 # Other temporary files
 .DS_Store
