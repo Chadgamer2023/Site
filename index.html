@@ -3,173 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to MrBoys VIP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="./js/ck.js" defer></script> <!-- Include ck.js for developer tools deterrent -->
+    <title>mrboys.vip - API Documentation</title>
     <style>
-        /* Modal styles */
-        #warningModal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
-            color: white; /* Text color */
-            text-align: center;
-            padding-top: 100px; /* Place the modal content at the center */
+        /* Basic Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            color: #E0E0E0;
+            background-color: #121212;
+            line-height: 1.6;
         }
-        #warningModal .modal-content {
-            background-color: #333;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+
+        /* Header and Navigation */
+        header {
+            background-color: #1F1F1F;
+            color: #E0E0E0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        #warningModal .close {
-            color: #aaa;
-            float: right;
+        header h1 {
             font-size: 28px;
+            color: #BB86FC;
+        }
+        nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 20px;
             font-weight: bold;
         }
-        #warningModal .close:hover,
-        #warningModal .close:focus {
-            color: red;
-            text-decoration: none;
+        nav a:hover {
+            color: #BB86FC;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #BB86FC, #3700B3);
+            color: white;
+        }
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .hero .cta-button {
+            background-color: #03DAC6;
+            color: #121212;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
             cursor: pointer;
+        }
+        .hero .cta-button:hover {
+            background-color: #018786;
+        }
+
+        /* Main Sections */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #1F1F1F;
+        }
+        section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #BB86FC;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            max-width: 250px;
+            background: #2A2A2A;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .feature-item h3 {
+            font-size: 20px;
+            color: #03DAC6;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #121212;
+            color: #E0E0E0;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        footer a {
+            color: #BB86FC;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
     </style>
 </head>
-<body class="light-mode">
+<body>
 
-    <!-- Dark mode toggle button -->
-    <button id="darkModeToggle">Enable Dark Mode</button>
-
-    <div class="login-container">
-        <h1>Login to MrBoys VIP</h1>
-        
-        <div class="content">
-            <form id="loginForm" action="login.php" method="POST">
-                
-                <div class="input-container">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="username" name="username" placeholder="Username" required>
-                </div>
-
-                <div class="input-container">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                </div>
-
-                <!-- Visitor counter -->
-                <div>
-                    <p>Visitor Count: <span id="visitorCount">Loading...</span></p>
-                </div>
-                
-                <!-- VRC Button -->
-                <button type="button" id="vrcButton" class="tos-btn">VRC</button>
-
-                <!-- TOS Popup -->
-                <div id="tosPopup" class="popup">
-                    <div class="popup-content">
-                        <p>Terms of Service: You will most likely see racial slurs and multiple slurs by accepting these terms of service. You agree to be 18 years of age. I'm not responsible for any hurt feelings. </p>
-                        <button id="tosYes">Yes</button>
-                        <button id="tosNo">No</button>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="rounded-button">Login</button>
-
-            </form>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>mrboys.vip</h1>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#documentation">Documentation</a>
+                <a href="#support">Support</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- Error Handling -->
-        <?php if (isset($_GET['error'])): ?>
-            <p class="error-message"><?php echo $_GET['error']; ?></p>
-        <?php endif; ?>
-    </div>
-
-    <!-- Firebase configuration and legacy global usage -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script src="./js/firebase.js"></script>
-
-    <!-- Visitor Count Logic -->
-    <script>
-        const visitorCountElement = document.getElementById('visitorCount');
-        const visitKey = 'hasVisited'; // Key for localStorage to track if the user has visited
-
-        // Function to update the visitor count in the DOM
-        function updateVisitorCount(count) {
-            visitorCountElement.textContent = count;
-        }
-
-        // Fetch the current visitor count from Firebase and update the page
-        fetchVisitorCount(updateVisitorCount);
-
-        // Check if the user has visited before using localStorage
-        if (!localStorage.getItem(visitKey)) {
-            // If the user hasn't visited, increment the count
-            incrementVisitorCount();
-            // Mark the user as visited in localStorage to prevent spamming
-            localStorage.setItem(visitKey, 'true');
-        }
-    </script>
-
-    <script src="js/script.js"></script>
-
-    <!-- Warning Modal HTML -->
-    <div id="warningModal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Warning!</h2>
-            <p>Do not attempt to open Developer Tools.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Welcome to mrboys.vip API</h2>
+            <p>Powerful APIs, Simple Integration</p>
+            <button class="cta-button" onclick="location.href='#documentation'">View Documentation</button>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Show warning modal when trying to open developer tools
-        window.onload = function () {
-            const warningModal = document.getElementById('warningModal');
+    <!-- Features Section -->
+    <section>
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Fast Response</h3>
+                    <p>Experience lightning-fast response times for all requests.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Easy Integration</h3>
+                    <p>Simple setup with detailed documentation for seamless integration.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Reliable</h3>
+                    <p>Robust infrastructure ensuring 99.99% uptime and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            document.addEventListener("contextmenu", function (e) {
-                e.preventDefault(); // Disable right-click context menu
-            }, false);
+    <!-- Documentation Section -->
+    <section id="documentation">
+        <div class="container">
+            <h2>API Documentation</h2>
+            <p>Find everything you need to get started with our API.</p>
+            <!-- Link to detailed documentation or code samples here -->
+        </div>
+    </section>
 
-            document.addEventListener("keydown", function (e) {
-                // Prevent specific key combinations
-                if ((e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl + Shift + I
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl + Shift + J
-                    (e.ctrlKey && e.keyCode === 85) || // Ctrl + U
-                    (e.ctrlKey && e.keyCode === 83) || // Ctrl + S
-                    (e.keyCode === 123) // F12
-                ) {
-                    e.preventDefault(); // Prevent the default action
-                    showWarning(); // Show warning modal
-                }
-            }, false);
 
-            function showWarning() {
-                warningModal.style.display = "block"; // Show the modal
-            }
-            
-            // Close the modal when the user clicks on <span> (x)
-            document.querySelector('.close').onclick = function() {
-                warningModal.style.display = "none"; // Hide the modal
-            }
-            
-            // Close the modal when clicking anywhere outside of the modal
-            window.onclick = function(event) {
-                if (event.target == warningModal) {
-                    warningModal.style.display = "none"; // Hide the modal
-                }
-            }
-        };
-    </script>
+    <!-- Support Section -->
+    <section id="support">
+        <div class="container">
+            <h2>Support</h2>
+            <p>Have questions? Contact our support team for assistance.</p>
+            <!-- Contact information or form can go here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 mrboys.vip - All Rights Reserved</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
+
 </body>
 </html>
