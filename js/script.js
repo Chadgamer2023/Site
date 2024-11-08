@@ -1,7 +1,7 @@
 // Wait for the document to load before executing the script
 document.addEventListener('DOMContentLoaded', function() {
     const randomFactButton = document.getElementById('getRandomFactButton');
-    const randomFactDisplay = document.getElementById('randomFact');
+    const randomFactDropdown = document.getElementById('randomFactDropdown');
 
     // When the button is clicked
     randomFactButton.addEventListener('click', async function() {
@@ -12,12 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // If the response is successful
             if (response.ok) {
                 const data = await response.json(); // Parse the response as JSON
-                randomFactDisplay.textContent = `Random Fact: ${data.fact}`; // Display the random fact
+                
+                // Enable the dropdown to display the fetched fact
+                randomFactDropdown.disabled = false;
+                
+                // Add the random fact as an option in the dropdown
+                const option = document.createElement('option');
+                option.value = data.fact;  // Set the option value to the fact text
+                option.textContent = data.fact;  // Set the option text to the fact text
+                
+                // Append the new option to the dropdown
+                randomFactDropdown.appendChild(option);
             } else {
-                randomFactDisplay.textContent = 'Error: Could not fetch a random fact.'; // Display an error message
+                alert('Error: Could not fetch a random fact.');
             }
         } catch (error) {
-            randomFactDisplay.textContent = `Error: ${error.message}`; // Display any errors
+            alert(`Error: ${error.message}`);
         }
     });
 });
