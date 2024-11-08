@@ -1,86 +1,195 @@
-require('dotenv').config();  // Load environment variables
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mrboys.vip - API Documentation</title>
+    <style>
+        /* Basic Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            color: #E0E0E0;
+            background-color: #121212;
+            line-height: 1.6;
+        }
 
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-const PORT = process.env.PORT || 3000;
+        /* Header and Navigation */
+        header {
+            background-color: #1F1F1F;
+            color: #E0E0E0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 28px;
+            color: #BB86FC;
+        }
+        nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #BB86FC;
+        }
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log("MongoDB connection error:", err));
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #BB86FC, #3700B3);
+            color: white;
+        }
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .hero .cta-button {
+            background-color: #03DAC6;
+            color: #121212;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .hero .cta-button:hover {
+            background-color: #018786;
+        }
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-app.use(express.static('public'));  // Serve static files from the 'public' folder
+        /* Main Sections */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #1F1F1F;
+        }
+        section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #BB86FC;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            max-width: 250px;
+            background: #2A2A2A;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .feature-item h3 {
+            font-size: 20px;
+            color: #03DAC6;
+            margin-bottom: 15px;
+        }
 
-// Define Fact Schema and Model
-const factSchema = new mongoose.Schema({
-  fact: String,
-  category: String,
-  language: String,
-  source: { type: String, default: 'user' }  // Default source as 'user'
-});
+        /* Footer */
+        footer {
+            background-color: #121212;
+            color: #E0E0E0;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        footer a {
+            color: #BB86FC;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
 
-const Fact = mongoose.model('Fact', factSchema);
+        /* General Styles */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
 
-// API Documentation with Swagger (Optional)
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Random Fact API',
-      version: '1.0.0',
-      description: 'API for fetching and submitting random facts'
-    },
-    servers: [
-      {
-        url: 'https://boysrfapi.onrender.com', // Replace with your Render app URL
-      }
-    ]
-  },
-  apis: ['index.js']
-};
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>mrboys.vip</h1>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#documentation">Documentation</a>
+                <a href="#support">Support</a>
+            </nav>
+        </div>
+    </header>
 
-// Routes
-// 1. Get Random Fact
-app.get('/api/facts/random', async (req, res) => {
-  const { language = 'en' } = req.query;
-  const count = await Fact.countDocuments({ language });
-  const random = Math.floor(Math.random() * count);
-  const fact = await Fact.findOne({ language }).skip(random);
-  res.json(fact);
-});
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Welcome to mrboys.vip API</h2>
+            <p>Powerful APIs, Simple Integration</p>
+            <button class="cta-button" onclick="location.href='#documentation'">View Documentation</button>
+        </div>
+    </section>
 
-// 2. Submit a Fact
-app.post('/api/facts', async (req, res) => {
-  const { fact, category, language = 'en', source = 'user' } = req.body;
+    <!-- Features Section -->
+    <section>
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Fast Response</h3>
+                    <p>Experience lightning-fast response times for all requests.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Easy Integration</h3>
+                    <p>Simple setup with detailed documentation for seamless integration.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Reliable</h3>
+                    <p>Robust infrastructure ensuring 99.99% uptime and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  if (!fact || !category) {
-    return res.status(400).json({ error: 'Fact and category are required' });
-  }
+    <!-- Documentation Section -->
+    <section id="documentation">
+        <div class="container">
+            <h2>API Documentation</h2>
+            <p>Find everything you need to get started with our API.</p>
+            <!-- Link to detailed documentation or code samples here -->
+        </div>
+    </section>
 
-  const newFact = new Fact({
-    fact,
-    category,
-    language,
-    source
-  });
 
-  await newFact.save();
-  res.status(201).json(newFact);
-});
+    <!-- Support Section -->
+    <section id="support">
+        <div class="container">
+            <h2>Support</h2>
+            <p>Have questions? Contact our support team for assistance.</p>
+            <!-- Contact information or form can go here -->
+        </div>
+    </section>
 
-// Serve the API Documentation (apidocs.html)
-app.get('/apidocs', (req, res) => {
-  res.sendFile(__dirname + '/public/apidocs.html');
-});
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 mrboys.vip - All Rights Reserved</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+</body>
+</html>
