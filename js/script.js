@@ -1,7 +1,9 @@
 // Wait for the document to load before executing the script
 document.addEventListener('DOMContentLoaded', function() {
     const randomFactButton = document.getElementById('getRandomFactButton');
-    const randomFactDropdown = document.getElementById('randomFactDropdown');
+    const randomFactModal = document.getElementById('randomFactModal');
+    const randomFactMessage = document.getElementById('randomFactMessage');
+    const closeModalButton = document.getElementById('closeModalButton');
 
     // When the button is clicked
     randomFactButton.addEventListener('click', async function() {
@@ -13,21 +15,28 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 const data = await response.json(); // Parse the response as JSON
                 
-                // Enable the dropdown to display the fetched fact
-                randomFactDropdown.disabled = false;
-                
-                // Add the random fact as an option in the dropdown
-                const option = document.createElement('option');
-                option.value = data.fact;  // Set the option value to the fact text
-                option.textContent = data.fact;  // Set the option text to the fact text
-                
-                // Append the new option to the dropdown
-                randomFactDropdown.appendChild(option);
+                // Update the message inside the modal
+                randomFactMessage.textContent = data.fact;
+
+                // Show the modal
+                randomFactModal.style.display = 'flex';
             } else {
                 alert('Error: Could not fetch a random fact.');
             }
         } catch (error) {
             alert(`Error: ${error.message}`);
+        }
+    });
+
+    // Close the modal when the user clicks the close button
+    closeModalButton.addEventListener('click', function() {
+        randomFactModal.style.display = 'none'; // Hide the modal
+    });
+
+    // Close the modal when the user clicks outside of the modal
+    window.addEventListener('click', function(event) {
+        if (event.target === randomFactModal) {
+            randomFactModal.style.display = 'none'; // Hide the modal if clicked outside
         }
     });
 });
