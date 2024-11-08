@@ -1,0 +1,48 @@
+<!-- submit-fact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Fact</title>
+</head>
+<body>
+    <h1>Submit a Random Fact</h1>
+    <form id="factForm">
+        <label for="fact">Fact:</label>
+        <input type="text" id="fact" name="fact" required>
+        
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
+        
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="en" required>
+        
+        <button type="submit">Submit Fact</button>
+    </form>
+    <p id="responseMessage"></p>
+
+    <script>
+        document.getElementById("factForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const fact = document.getElementById("fact").value;
+            const category = document.getElementById("category").value;
+            const language = document.getElementById("language").value;
+
+            const response = await fetch("https://mrboys.vip/api/facts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": "YOUR_API_KEY" // Replace with a valid API key if needed
+                },
+                body: JSON.stringify({ fact, category, language })
+            });
+            
+            const result = await response.json();
+            document.getElementById("responseMessage").textContent = response.ok
+                ? "Fact submitted successfully!"
+                : `Error: ${result.error}`;
+        });
+    </script>
+</body>
+</html>
