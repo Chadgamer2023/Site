@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Facts API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #0056b3;
+    }
+    code {
+      background-color: #f1f1f1;
+      padding: 2px 4px;
+      font-size: 1.1em;
+      border-radius: 4px;
+      color: #d63384;
+    }
+    .endpoint {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-left: 4px solid #0056b3;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+    .endpoint p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Random Facts API Documentation</h1>
+    <p>Welcome to the Random Facts API! Use the endpoints below to fetch random facts or submit your own. All endpoints are prefixed with <code>/api</code>, so base URLs will look like <code>https://mrboys.vip/api</code>.</p>
+
+    <div class="endpoint">
+      <h2>1. Fetch a Random Fact</h2>
+      <p><strong>Endpoint:</strong> <code>GET /api/facts/random</code></p>
+      <p><strong>Description:</strong> Retrieves a random fact from the database.</p>
+      <p><strong>Query Parameters:</strong></p>
+      <ul>
+        <li><code>language</code> (optional): Specify the language of the fact (e.g., <code>en</code> for English). Defaults to English.</li>
+      </ul>
+      <p><strong>Example Request:</strong></p>
+      <code>GET https://mrboys.vip/api/facts/random?language=en</code>
+      <p><strong>Response:</strong></p>
+      <pre>
+{
+  "fact": "Honey never spoils.",
+  "category": "Science",
+  "language": "en",
+  "source": "user"
+}
+      </pre>
+    </div>
+
+    <div class="endpoint">
+      <h2>2. Submit a New Fact</h2>
+      <p><strong>Endpoint:</strong> <code>POST /api/facts</code></p>
+      <p><strong>Description:</strong> Allows users to submit a new fact to the database.</p>
+      <p><strong>Request Body:</strong> JSON object containing:</p>
+      <ul>
+        <li><code>fact</code> (required): The fact content, as a string.</li>
+        <li><code>category</code> (required): The category of the fact (e.g., "Science").</li>
+        <li><code>language</code> (optional): Language code for the fact (e.g., <code>en</code> for English). Defaults to English.</li>
+        <li><code>source</code> (optional): Source of the fact. Defaults to <code>user</code>.</li>
+      </ul>
+      <p><strong>Example Request:</strong></p>
+      <code>POST https://mrboys.vip/api/facts</code>
+      <pre>
+{
+  "fact": "A group of flamingos is called a 'flamboyance'.",
+  "category": "Animals",
+  "language": "en"
+}
+      </pre>
+      <p><strong>Response:</strong></p>
+      <pre>
+{
+  "_id": "61234abcde1234567890",
+  "fact": "A group of flamingos is called a 'flamboyance'.",
+  "category": "Animals",
+  "language": "en",
+  "source": "user"
+}
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
