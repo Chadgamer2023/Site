@@ -192,14 +192,12 @@
                 <form id="factForm">
                     <input type="text" id="fact" name="fact" placeholder="Enter your fact" required>
                     <input type="text" id="category" name="category" placeholder="Enter category" required>
+                    <input type="text" id="tags" name="tags" placeholder="Enter tags (comma separated)">
+                    <input type="text" id="author" name="author" placeholder="Enter your name (optional)">
                     <button type="submit">Submit Fact</button>
                 </form>
                 <div id="resultMessage" class="error"></div>
                 <div id="quoteMessage" class="success"></div>
-
-                <!-- New Button to Get Random Fact -->
-                <button id="getRandomFactBtn" class="cta-button">Get Random Fact</button>
-                <div id="randomFactMessage" class="success"></div>
             </div>
         </div>
     </section>
@@ -248,22 +246,6 @@
                 }
             } catch (error) {
                 document.getElementById('resultMessage').textContent = `Error: ${error.message}`;
-            }
-        });
-
-        // Fetch random fact and display it
-        document.getElementById('getRandomFactBtn').addEventListener('click', async function() {
-            try {
-                const response = await fetch('https://boysrfapi.onrender.com/api/random-fact');
-                const data = await response.json();
-
-                if (response.ok) {
-                    document.getElementById('randomFactMessage').textContent = `Random Fact: ${data.fact}`;
-                } else {
-                    document.getElementById('randomFactMessage').textContent = 'Error: Failed to fetch a random fact.';
-                }
-            } catch (error) {
-                document.getElementById('randomFactMessage').textContent = `Error: ${error.message}`;
             }
         });
     </script>
